@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import sqlite3 as sl
-con = sl.connect('todo.db')
+import settings
+
+con = sl.connect(settings.DATABASE_PATH)
 
 with con:
     con.execute("""
@@ -14,6 +16,14 @@ with con:
 with con:
     con.execute("""
         CREATE TABLE DONE (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL
+        );
+    """)
+
+with con:
+    con.execute("""
+        CREATE TABLE OLD_TASKS (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
         );
