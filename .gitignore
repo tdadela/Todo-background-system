@@ -1,3 +1,4 @@
+*.db
 *.tex
 
 *.fdb_latexmk
