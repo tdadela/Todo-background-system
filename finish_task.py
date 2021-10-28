@@ -16,6 +16,7 @@ con = sl.connect(settings.DATABASE_PATH)
 
 with con:
     task = con.execute('SELECT name FROM TASK WHERE tex_id = ' + sys.argv[1])
+    con.execute('DELETE FROM TASK WHERE tex_id = ' + sys.argv[1])
     con.execute('UPDATE TASK SET tex_id = tex_id - 1 WHERE tex_id > ' + sys.argv[1])
     name = task.fetchall()[0]
 
@@ -28,10 +29,7 @@ data = [
 with con:
     con.executemany(sql, data)
 
-with con:
-    con.execute('DELETE FROM TASK WHERE tex_id = ' + sys.argv[1])
-
-f = open('tasks.tex', 'w')
+f = open(settings.TASK_TEX_FILE, 'w')
 
 with con:
     data = con.execute('SELECT name FROM TASK')
@@ -42,7 +40,7 @@ with con:
 
 f.close()
 
-f = open('done.tex', 'w')
+f = open(settings.DONE_TEX_FILE, 'w')
 
 with con:
     data = con.execute('SELECT name FROM DONE')

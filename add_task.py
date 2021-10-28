@@ -23,7 +23,7 @@ data = [
 with con:
     con.executemany(sql, data)
 
-f = open('tasks.tex', 'w')
+f = open(settings.TASK_TEX_FILE, 'w')
 
 with con:
     data = con.execute('SELECT name FROM TASK')

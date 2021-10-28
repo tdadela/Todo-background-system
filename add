@@ -1,3 +1,4 @@
 #!/bin/sh
+cd ${0%/*}
 python3 add_task.py "$@"
 ./generate_and_set_wallpaper.sh
