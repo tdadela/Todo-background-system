@@ -1,5 +1,6 @@
 *.db
 *.tex
+settings.py
 
 *.fdb_latexmk
 *.png
