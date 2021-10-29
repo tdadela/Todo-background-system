@@ -44,7 +44,7 @@ f = open(settings.DONE_TEX_FILE, 'w')
 
 with con:
     data = con.execute('SELECT name FROM DONE')
-    f.write(r'\begin{itemize}}' + '\n')
+    f.write(r'\begin{itemize}' + '\n')
     for row in data:
         f.write('\t\item ' + str(row[0]) + '\n')
     f.write('\end{itemize}')
