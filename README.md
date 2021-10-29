@@ -16,8 +16,8 @@ $ ./setup
 Adding tasks.  
 ./add <task name>
 ```bash
-$ ./add feed-cat
-$ ./add take-control-of-the-country
+$ ./add feed cat
+$ ./add take control of the country
 ```
 Finishing tasks.  
 ./finish <task number>   

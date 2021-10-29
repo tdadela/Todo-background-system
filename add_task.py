@@ -7,6 +7,8 @@ import settings
 if len(sys.argv) == 1:
    exit(0) 
 
+task_name = ' '.join(sys.argv[1:])
+
 con = sl.connect(settings.DATABASE_PATH)
 
 with con:
@@ -17,7 +19,7 @@ with con:
 
 sql = 'INSERT INTO TASK (tex_id, name) values(?, ?)'
 data = [
-    (new_max, sys.argv[1]),
+    (new_max, task_name),
 ]
 
 with con:
