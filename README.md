@@ -14,13 +14,13 @@ $ ./setup
 ## Usage
 
 Adding tasks.  
-./add <task name>
+./add [task name]
 ```bash
 $ ./add feed cat
 $ ./add take control of the country
 ```
 Finishing tasks.  
-./finish <task number>   
+./finish [task number]   
 Task number is visible on wallpaper.
 ```bash
 $ ./finish 1
