@@ -8,7 +8,7 @@ To do background system is an application that shows tasks directly on wallpaper
 ```bash
 $ git clone https://github.com/td236/Todo-background-system.git
 $ cd Todo-background-system
-$ ./setup
+$ ./setup.sh
 ```
 
 ## Usage
