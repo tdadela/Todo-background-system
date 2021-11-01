@@ -2,7 +2,17 @@
 
 To do background system is an application that shows tasks directly on wallpaper.
 
-
+## Requirements
+```
+python3 
+texlive 
+poppler-utils
+feh
+```
+You can install them on your own or by running install_requirements.sh script.
+```sh
+$ sudo ./install_requirements.sh
+```
 ## Installation
 
 ```bash
@@ -31,3 +41,4 @@ Pull requests are welcome. For considerable changes, please open an issue first 
 
 ## License
 MIT
+
