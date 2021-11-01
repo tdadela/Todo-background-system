@@ -25,13 +25,3 @@ data = [
 with con:
     con.executemany(sql, data)
 
-f = open(settings.TASK_TEX_FILE, 'w')
-
-with con:
-    data = con.execute('SELECT name FROM TASK')
-    f.write(r'\begin{enumerate}' + '\n')
-    for row in data:
-        f.write('\t\item ' + str(row[0]) + '\n')
-    f.write('\end{enumerate}')
-
-f.close()
