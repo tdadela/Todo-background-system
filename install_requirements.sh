@@ -5,6 +5,6 @@ elif [ -x "$(command -v dnf)" ];    then sudo dnf install $packages
 elif [ -x "$(command -v yum)" ];    then sudo yum install $packages
 elif [ -x "$(command -v apk)" ];    then sudo apk add --no-cache $packages
 elif [ -x "$(command -v zypper)" ]; then sudo zypper install $packages
-elif [ -x "$(command -v pacman)" ]; then sudo pacman -S poppler python3 texlive feh
+elif [ -x "$(command -v pacman)" ]; then sudo pacman -S poppler python3 texlive-most feh
 else echo "You need to install: $packages manually." >&2
 fi
