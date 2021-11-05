@@ -1,6 +1,7 @@
 *.db
 *.tex
 settings.py
+todo.md
 
 *.fdb_latexmk
 *.png
