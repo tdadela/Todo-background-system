@@ -23,7 +23,7 @@ try:
         """)
 
         cur.execute("""
-            CREATE TABLE OLD_TASKS (
+                    CREATE TABLE OLD_TASK (
                 id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL
             );

@@ -6,5 +6,5 @@ import settings
 con = sl.connect(settings.DATABASE_PATH)
 
 with con:
-    con.execute('INSERT INTO OLD_TASKS SELECT * FROM DONE;')
+    con.execute('INSERT INTO OLD_TASK SELECT * FROM DONE;')
     con.execute('DELETE FROM DONE;')
