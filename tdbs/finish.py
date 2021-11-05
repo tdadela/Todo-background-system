@@ -18,4 +18,5 @@ if name == '':
     print("There is no task with this number.")
     exit()
 
-add_to_done(settings.DATABASE_PATH, name)
+if sys.argv[-1] != "remove":
+    add_to_done(settings.DATABASE_PATH, name)

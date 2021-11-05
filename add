@@ -1,4 +1,3 @@
 #!/bin/sh
-cd ${0%/*}/tdbs
-python3 add.py "$@"
-./generate_set_wallpaper.sh
+
+./td "add" "$@"
