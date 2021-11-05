@@ -1,9 +1,11 @@
 #!/usr/bin/python
 import sqlite3
 
+
 def not_allowed_table_name(name: str):
     if name not in {"TASK", "DONE", "OLD_TASK"}:
         raise ValueError('Not allowed table name.')
+
 
 def remove(db_path: str, table_name: str, tex_id: int):
     not_allowed_table_name(table_name)
@@ -21,8 +23,20 @@ def remove(db_path: str, table_name: str, tex_id: int):
     con.close()
     return '' if task_name == [] else task_name[0]
 
+def add_to_task(db_path: str, task_name: str):
+    con = sqlite3.connect(db_path)
+    try:
+        with con:
+            local_max = con.execute('SELECT MAX(tex_id) FROM TASK')
+            curr_max = local_max.fetchall()[0][0]
+            new_max = 1 if curr_max == None else curr_max + 1
+            con.execute('INSERT INTO TASK (tex_id, name) values(?, ?)', (new_max, task_name))
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
+        print('Could not complete operation:', e)
+    con.close()
+
+
 def add_to_done(db_path: str, task_name: str):
-    print(task_name)
     con = sqlite3.connect(db_path)
     try:
         with con:

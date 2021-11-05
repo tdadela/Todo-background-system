@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import sqlite3 as sl
 import sys
 import settings
 from db_operation import remove, add_to_done
