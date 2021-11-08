@@ -11,7 +11,7 @@ def last_migration_today():
     today = str(datetime.datetime.combine(datetime.date.today(),
                                           datetime.time.min))
     migration = last_migration(settings.DATABASE_PATH)
-    return today >= migration
+    return today <= migration
 
 
 if sys.argv[-1] == "force" or not last_migration_today():
