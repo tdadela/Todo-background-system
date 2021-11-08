@@ -1,7 +1,8 @@
 #!/bin/bash
+
 cd ${0%/*}/tdbs
-echo "${@}"
-echo $1
+python3 done_to_old.py
+
 case $1 in
   add) 
     python3 add.py "${@:2}"
@@ -11,6 +12,9 @@ case $1 in
     ;;
   remove)
     python3 finish.py "${@:2}" "remove"
+    ;;
+  migrate)
+    python3 done_to_old.py "force"
     ;;
   *)
     exit 0

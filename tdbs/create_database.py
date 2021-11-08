@@ -23,10 +23,18 @@ try:
         """)
 
         cur.execute("""
-                    CREATE TABLE OLD_TASK (
+            CREATE TABLE OLD_TASK (
                 id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL
             );
+        """)
+        cur.execute("""
+            CREATE TABLE MIGRATION (
+                last_migration timestamp
+            );
+        """)
+        cur.execute("""
+        INSERT INTO MIGRATION VALUES(CURRENT_TIMESTAMP);
         """)
 except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
     print('Could not complete operation:', e)
