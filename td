@@ -16,6 +16,8 @@ case $1 in
   migrate)
     python3 done_to_old.py "force"
     ;;
+  refresh)
+    ;;
   *)
     exit 0
     ;;
