@@ -27,6 +27,22 @@ def remove(db_path: str, table_name: str, tex_id: int):
     return '' if task_name == [] else task_name[0]
 
 
+def select_all_tasks(db_path: str, table_name: str):
+    '''Select and return all task names from a given table.'''
+    not_allowed_table_name(table_name)
+    con = sqlite3.connect(db_path)
+    task_list = []
+    try:
+        with con:
+            tasks = con.execute(f'SELECT name FROM {table_name}')
+            task_list = tasks.fetchall()
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
+        print('Could not complete operation:', e)
+    finally:
+        con.close()
+    return task_list
+
+
 def add_to_task(db_path: str, task_name: str):
     con = sqlite3.connect(db_path)
     try:
