@@ -16,7 +16,14 @@ case $1 in
   migrate)
     python3 done_to_old.py "force"
     ;;
-  refresh)
+  refresh | work)
+    ;;
+  relax)
+    CUSTOM_BG=../img/bg.jpg
+    if [[ -f "$CUSTOM_BG" ]]; then
+        feh --bg-fill $CUSTOM_BG
+    fi
+    exit 0
     ;;
   *)
     exit 0
