@@ -1,7 +1,9 @@
 *.db
 *.tex
+*.jpg
 settings.py
 todo.md
+.flaskenv
 
 *.fdb_latexmk
 *.png
