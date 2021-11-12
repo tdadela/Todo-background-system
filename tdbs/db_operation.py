@@ -3,28 +3,30 @@ import sqlite3
 
 
 def not_allowed_table_name(name: str):
+    '''Check if given string is allowed table name.'''
     if name not in {"TASK", "DONE", "OLD_TASK"}:
         raise ValueError('Not allowed table name.')
 
 
-def remove(db_path: str, table_name: str, tex_id: int):
+def remove(db_path: str, table_name: str, tex_id: str):
+    '''Remove task with given tex_id and return its name.'''
     not_allowed_table_name(table_name)
     con = sqlite3.connect(db_path)
-    id = str(tex_id)
     task_name = []
     try:
         with con:
             task = con.execute(
-                f'SELECT name FROM {table_name} WHERE tex_id = ?', id)
-            con.execute(f'DELETE FROM {table_name} WHERE tex_id = ?', id)
+                f'SELECT name FROM {table_name} WHERE tex_id = ?', (tex_id,))
+            con.execute(
+                f'DELETE FROM {table_name} WHERE tex_id = ?', (tex_id,))
             con.execute(
                 f'''UPDATE {table_name} SET
-                tex_id = tex_id - 1 WHERE tex_id > ?''', id)
+                tex_id = tex_id - 1 WHERE tex_id > ?''', (tex_id,))
             task_name = task.fetchall()
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
     con.close()
-    return '' if task_name == [] else task_name[0]
+    return '' if len(task_name) == 0 else task_name[0]
 
 
 def select_all_tasks(db_path: str, table_name: str):
@@ -44,6 +46,7 @@ def select_all_tasks(db_path: str, table_name: str):
 
 
 def add_to_task(db_path: str, task_name: str):
+    '''Add new task to TASK table.'''
     con = sqlite3.connect(db_path)
     try:
         with con:
