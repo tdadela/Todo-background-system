@@ -29,6 +29,27 @@ def remove(db_path: str, table_name: str, tex_id: str):
     return '' if len(task_name) == 0 else task_name[0]
 
 
+def remove_using_id(db_path: str, table_name: str, id: str):
+    '''Remove task with given id and return its name.'''
+    not_allowed_table_name(table_name)
+    con = sqlite3.connect(db_path)
+    task_name = []
+    try:
+        with con:
+            task = con.execute(
+                f'SELECT name FROM {table_name} WHERE id = ?', (id,))
+            con.execute(
+                f'DELETE FROM {table_name} WHERE id = ?', (id,))
+            con.execute(
+                f'''UPDATE {table_name} SET
+                tex_id = tex_id - 1 WHERE id > ?''', (id,))
+            task_name = task.fetchall()
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
+    con.close()
+    return '' if len(task_name) == 0 else task_name[0]
+
+
 def select_all_tasks(db_path: str, table_name: str):
     '''Select and return all task names from a given table.'''
     not_allowed_table_name(table_name)
@@ -36,10 +57,10 @@ def select_all_tasks(db_path: str, table_name: str):
     task_list = []
     try:
         with con:
-            tasks = con.execute(f'SELECT name FROM {table_name}')
+            tasks = con.execute(f'SELECT name, id FROM {table_name}')
             task_list = tasks.fetchall()
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
     finally:
         con.close()
     return task_list

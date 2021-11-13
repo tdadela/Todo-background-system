@@ -11,12 +11,32 @@
     {% for error in form.name.errors %}
       <span class='error'>[{{ error }}]</span><br>
     {% endfor %}
-    {{ form.submit(class='btn btn-primary') }}
+    {{ form.submit(class='btn btn-outline-primary') }}
 </form>
 {% endif %}
 <div class="list-group">
 {% for task in tasks %}
-    <a href="#" class="list-group-item list-group-item-action">{{ task[0] }}</a>
+    <div href="#" class="list-group-item list-group-item-action">
+    {% if done %}
+        <form action="" method="post">
+            <input value = "{{ task[1] }}" type="hidden" name="task_id">
+                {{ done.hidden_tag() }}
+                {{ done.submit(onclick="this.parentElement.parentElement.style.display = 'none';", class="btn btn-outline-success float-start") }}
+        </form>
+    {% endif %}
+    {% if index %}
+        <a href="/finish/{{ task[1] }}" class="btn btn-outline-success float-start">Done</a>
+        <a href="/delete/{{ task[1] }}" class="btn btn-outline-danger float-end">Delete</a>
+    {% endif %}
+        &emsp;{{ task[0] }}
+    {% if delete %}
+        <form action="" method="post">
+            <input value = "{{ task[1] }}" type="hidden" name="task_id">
+                {{ delete.hidden_tag() }}
+                {{ delete.submit(onclick="this.parentElement.parentElement.style.display = 'none';", class="btn btn-outline-danger float-end") }}
+        </form>
+    {% endif %}
+    </div>
 {% endfor %}
  </div>
 {% endblock %}
