@@ -4,8 +4,7 @@
 
 {% if form %}
 <form action="" method="post" class="form-control form-control-lg">
-  {{ form.hidden_tag() }}
-
+    {{ form.hidden_tag() }}
     {{ form.name.label }}
     {{ form.name(class='form-control form-control-lg', autofocus=true) }}
     {% for error in form.name.errors %}
@@ -16,26 +15,12 @@
 {% endif %}
 <div class="list-group">
 {% for task in tasks %}
-    <div href="#" class="list-group-item list-group-item-action">
-    {% if done %}
-        <form action="" method="post">
-            <input value = "{{ task[1] }}" type="hidden" name="task_id">
-                {{ done.hidden_tag() }}
-                {{ done.submit(onclick="this.parentElement.parentElement.style.display = 'none';", class="btn btn-outline-success float-start") }}
-        </form>
-    {% endif %}
+    <div class="list-group-item list-group-item-action" id={{ task[1] }}>
     {% if index %}
-        <a href="/finish/{{ task[1] }}" class="btn btn-outline-success float-start">Done</a>
-        <a href="/delete/{{ task[1] }}" class="btn btn-outline-danger float-end">Delete</a>
+        <div onclick="finishTask({{ task[1] }})" class="btn btn-outline-success float-start" >Done</div>
+        <div onclick="deleteTask({{ task[1] }})" class="btn btn-outline-danger float-end">Delete</div>
     {% endif %}
-        &emsp;{{ task[0] }}
-    {% if delete %}
-        <form action="" method="post">
-            <input value = "{{ task[1] }}" type="hidden" name="task_id">
-                {{ delete.hidden_tag() }}
-                {{ delete.submit(onclick="this.parentElement.parentElement.style.display = 'none';", class="btn btn-outline-danger float-end") }}
-        </form>
-    {% endif %}
+    &emsp;{{ task[0] }}
     </div>
 {% endfor %}
  </div>
