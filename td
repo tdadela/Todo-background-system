@@ -30,4 +30,4 @@ case $1 in
     ;;
 esac
 
-./generate_set_wallpaper.sh
+./generate_wallpaper.sh
