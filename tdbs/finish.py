@@ -10,7 +10,7 @@ if len(sys.argv) == 1:
 try:
     int(sys.argv[1])
 except ValueError:
-    print('Argument is not intiger.')
+    print('Argument is not integer.')
     sys.exit()
 
 for t in sys.argv[1:]:
