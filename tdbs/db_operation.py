@@ -78,8 +78,8 @@ def add_to_task(db_path: str, task_name: str):
             con.execute(
                 'INSERT INTO TASK (tex_id, name) values(?, ?)',
                 (new_max, task_name))
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
     con.close()
 
 
@@ -88,8 +88,8 @@ def add_to_done(db_path: str, task_name: str):
     try:
         with con:
             con.execute('INSERT INTO DONE (name) VALUES(?)', task_name)
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
     con.close()
 
 
@@ -101,8 +101,8 @@ def migrate_done_to_old(db_path: str):
             con.execute('DELETE FROM DONE;')
             con.execute('''UPDATE MIGRATION SET last_migration
             = CURRENT_TIMESTAMP''')
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
     con.close()
 
 
@@ -114,8 +114,8 @@ def last_migration(db_path: str):
         with con:
             migration = con.execute(
                 'SELECT last_migration FROM MIGRATION;').fetchall()[0][0]
-    except (sqlite3.OperationalError, sqlite3.IntegrityError) as e:
-        print('Could not complete operation:', e)
+    except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
+        print('Could not complete operation:', err)
         return None
     finally:
         con.close()
