@@ -57,7 +57,8 @@ def select_all_tasks(db_path: str, table_name: str):
     task_list = []
     try:
         with con:
-            tasks = con.execute(f'SELECT name, id FROM {table_name}')
+            tasks = con.execute(
+                f'SELECT name, id FROM {table_name} ORDER BY id')
             task_list = tasks.fetchall()
     except (sqlite3.OperationalError, sqlite3.IntegrityError) as err:
         print('Could not complete operation:', err)
