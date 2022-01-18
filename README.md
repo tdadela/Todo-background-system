@@ -16,7 +16,7 @@ $ sudo ./install_requirements.sh
 ## Installation
 
 ```bash
-$ git clone https://github.com/td236/Todo-background-system.git
+$ git clone https://github.com/tdadela/Todo-background-system.git
 $ cd Todo-background-system
 $ ./setup.sh
 ```
